@@ -22,7 +22,11 @@ const addNoteHandler = (request, h) => { // Fungsi untuk menambahkan catatan bar
             message: 'Catatan berhasil ditambahkan',
             data: {
                 noteId: id,
+                title: title,
+                body: body,
+                tags: tags
             },
+            
         });
         response.code(201); // Set status code response menjadi 201 (created)
         return response;
@@ -37,4 +41,34 @@ const addNoteHandler = (request, h) => { // Fungsi untuk menambahkan catatan bar
     return response;
 };
 
-module.exports = { addNoteHandler }; // Ekspor fungsi addNoteHandler agar bisa digunakan di file lain
+const getAllNotesHandler = () => ({
+    status: 'success',
+    data: {
+      notes,
+    },
+});
+
+const getNoteByIdHandler = (request, h) => {
+    const { id } = request.params; // destructuring id from params
+
+    const note = notes.filter((n) => n.id === id)[0];
+
+    if (note != undefined) {
+        return {
+            status: 'success',
+            data: {
+                note,
+            },
+        };
+    }
+
+    const response = h.response({
+        status: 'fail',
+        message: 'Catatan tidak ditemukan'
+    });
+
+    response.code(404);
+    return response;
+}
+
+module.exports = { addNoteHandler, getAllNotesHandler, getNoteByIdHandler }; // Ekspor fungsi addNoteHandler agar bisa digunakan di file lain
