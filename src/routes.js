@@ -1,4 +1,10 @@
-const { addNoteHandler, getAllNotesHandler, getNoteByIdHandler } = require("./handler"); // Mengimpor addNoteHandler dari modul handler
+const {
+  addNoteHandler,
+  getAllNotesHandler,
+  getNoteByIdHandler,
+  editNoteByIdHandler,
+  deleteNoteByIdHandler
+} = require("./handler"); // Mengimpor addNoteHandler dari modul handler
 
 const routes = [ // Deklarasi array routes
   {
@@ -15,6 +21,16 @@ const routes = [ // Deklarasi array routes
     method: 'GET',
     path: '/notes/{id}',
     handler: getNoteByIdHandler,
+  },
+  {
+    method: 'PUT',
+    path: '/notes/{id}',
+    handler: editNoteByIdHandler,
+  },
+  {
+    method: 'DELETE',
+    path: '/notes/{id}',
+    handler: deleteNoteByIdHandler,
   },
 ];
 
