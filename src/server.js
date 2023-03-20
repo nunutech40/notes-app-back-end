@@ -4,7 +4,7 @@ const routes = require('./routes'); // Mengimpor modul routes
 const init = async () => { // Deklarasi fungsi init
   const server = Hapi.server({ // Membuat objek server dengan konfigurasi port dan host
     port: 5000,
-    host: 'localhost',
+    host: process.env.NODE_ENV !== 'production' ? 'localhost' : '0.0.0.0',
     routes: {
       cors: {
         origin: ['*'],
